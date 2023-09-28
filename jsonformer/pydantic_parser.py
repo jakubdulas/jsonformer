@@ -61,7 +61,7 @@ def create_scheme(obj, self=False, scheme={}):
                 "type": "object",
                 "properties": {}
             }
-            create_scheme(field, scheme[field_name]["properties"])
+            create_scheme(field, scheme=scheme[field_name]["properties"])
             continue
         
         value = set_value(field, field_type)
