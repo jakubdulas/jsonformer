@@ -51,7 +51,7 @@ def set_value(field, field_type):
     return None
     
 
-def create_scheme(obj, scheme={}):
+def create_scheme(obj, self=False, scheme={}):
     annotations = get_annotations(obj)
     for field_name, field in annotations.items():
         field_type = field.__name__ if hasattr(field, "__name__") else str(field)
@@ -70,5 +70,7 @@ def create_scheme(obj, scheme={}):
             continue
         else:
             raise Exception(f"Unsupported data type: {field_type}")
-
+    if self:
+        return {"type": "object", "properties": {obj.__name__: {"type": "object", "properties": scheme}}}
     return {"type": "object", "properties": scheme}
+
